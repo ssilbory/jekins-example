@@ -31,24 +31,30 @@ spec:
   }
   environment {
       NIRMATA_TOKEN     = credentials('NIRMATA_TOKEN')
+      NIRMATA_URL       = 'https://nirmata.io'
+      NCTL_URL          = 'https://nirmata-downloads.s3.us-east-2.amazonaws.com/nctl/nctl_3.1.0-rc2/nctl_3.1.0-rc2_linux_64-bit.zip'
+      GIT_REPO          = 'ssilbory/alpine-tomcat'
+      APP_NAME          = 'alpine-tomcat'
+      ENV_NAME          = 'tomcat'
+      YAML_FILE         = 'tomcat.yaml'
   }
   stages {
     stage('Build with Kaniko') {
       steps {
         git 'https://github.com/silborynirmata/jekins-example.git'
-        sh "/kaniko/executor --context `pwd` --destination ssilbory/alpine-tomcat:${env.BUILD_ID}"
-        sh "sed  s/:latest/:${env.BUILD_ID}/ -i tomcat.yaml"
+        sh "/kaniko/executor --context `pwd` --destination ${GIT_REPO}:${env.BUILD_ID}"
+        sh "sed  s/:latest/:${env.BUILD_ID}/ -i ${YAML_FILE}"
         sh '''if command -v nctl ;then
-                nctl environments apps apply foo -e foo -f tomcat.yaml ''
+                nctl environments apps apply ${APP_NAME} -e ${ENV_NAME} -f ${YAML_FILE}
               else
                 if [ -f nctl ];then
-                  nctl environments apps apply foo --url https://nirmata.io -e foo -f tomcat.yaml
+                  chmod +x nctl
                 else
-                  wget -O nctl.zip https://nirmata-downloads.s3.us-east-2.amazonaws.com/nctl/nctl_3.1.0-rc2/nctl_3.1.0-rc2_linux_64-bit.zip
+                  wget -O nctl.zip ${NCTL_URL}
                   unzip -o nctl.zip
                   chmod 500 nctl
                 fi
-                ./nctl environments apps apply foo --url https://nirmata.io -e foo -f tomcat.yaml 
+                ./nctl environments apps apply ${APP_NAME} -e ${ENV_NAME} -f ${YAML_FILE}
               fi'''
       }
     }
