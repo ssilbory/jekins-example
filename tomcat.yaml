@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: tomcat-test
-        image: ssilbory/alpine-tomcat:v5
+        image: ssilbory/alpine-tomcat:latest
         ports:
         - containerPort: 8080
 ---
