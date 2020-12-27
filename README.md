@@ -1,6 +1,7 @@
 # jekins-example
 
 This repo contains an example of using Nirmata and nctl to deploy a simple tomcat app.  It makes use of Kaniko to build in a container without needed access to the docker daemon.
+https://github.com/GoogleContainerTools/kaniko
 
 To use
 - Install or otherwise get access to Jenkins.
