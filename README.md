@@ -23,7 +23,7 @@ echo "{\"auths\":{\"$REGISTRY\":{\"username\":\"${REGISTRY_USER}\",\"password\":
 # Jenkins Setup
 - Import jenkins helm repo Catalog -> Helm -> Add Helm Repo use https://charts.jenkins.io
 - Import Jenkins chart to a catalog app named jenkins.
-- Edit application and select Other catagory.
+- Edit application and select Other category.
 - Download and Import SA yaml for cluster access.
 https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-sa.yaml 
 - Deploy as a standard app or as an addon.  Note that you will need to be an admin and the namespace must be jenkins.
