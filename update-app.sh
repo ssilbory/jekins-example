@@ -2,7 +2,10 @@
 
 # Script updates the an app running in an environment.
 # To run this set and ecport NIRMATA_TOKEN and if needed NIRMATA_URL before running the script
-#  The scripts arguments should be an environment, an app-namem and a single yaml file
+#  The scripts arguments should be an environment, an app-name and a single yaml file
+TARGET_ENV="$1"
+APP="$2"
+YAML="$3"
 
 #NIRMATA_TOKEN = 'MY_NIRMATA_TOKEN'
 #NIRMATA_URL='https://nirmata.io'
@@ -10,7 +13,7 @@ NCTL_URL='https://nirmata-downloads.s3.us-east-2.amazonaws.com/nctl/nctl_3.1.0-r
 
 
 if command -v nctl ;then
-  nctl environments apps apply $2 -e $1 -f $3
+  nctl environments apps apply $APP -e $TARGET_ENV -f $YAML
 else
   if [ -f nctl ];then
     chmod +x nctl
@@ -19,5 +22,5 @@ else
     unzip -o nctl.zip
     chmod 500 nctl
   fi
-  ./nctl environments apps apply $2 o -e $1 -f $3
+  ./nctl environments apps apply $APP -e $TARGET_ENV -f $YAML
 fi
