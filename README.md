@@ -26,10 +26,13 @@ https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-regi
 - create-catalog-app.sh   Create a catalog app.
 
 # Sample Jenkinsfiles
-Jenkinsfile.docker        A simple JenkinsfileDocker build for VMs and Docker in Docker (bad idea)
-Jenkinsfile.img           A Jenkinsfile using img (see img-jenkins dir for building Docker image for this.)
+- Jenkinsfile.docker        
+A simple JenkinsfileDocker build for VMs and Docker in Docker (bad idea)
+- Jenkinsfile.img           
+A Jenkinsfile using img (see img-jenkins dir for building a Docker image for this.)
 https://github.com/genuinetools/img
-Jenkinsfile.kaniko        A Jenkinsfile using Kaniko
+- Jenkinsfile.kaniko        
+A Jenkinsfile using Kaniko
 https://github.com/GoogleContainerTools/kaniko
 
 
