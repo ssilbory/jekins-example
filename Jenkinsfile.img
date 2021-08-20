@@ -16,20 +16,10 @@ spec:
   containers:
   - name: img
     image: docker.io/ssilbory/img-builder:latest
-    securityContext:
-        privileged: true
-    imagePullPolicy: Always
     command:
     - sleep
     args:
     - 9999999
-    - name: img
-      image: r.j3ss.co/img
-      imagePullPolicy: Always
-      command:
-      - sleep
-      args:
-      - 99999999
     - name: bash
       image: bash:latest
       command:
