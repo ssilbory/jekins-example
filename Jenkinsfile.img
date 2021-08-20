@@ -43,7 +43,7 @@ spec:
         //sh "img push ${DOCKER_REPO}:${env.BUILD_ID}"
         }
     }
-    stage('Build with Img') {
+    stage('Bash container') {
       steps {
         container('bash') {
           sh 'echo bash container'
