@@ -20,12 +20,12 @@ spec:
     - sleep
     args:
     - 9999999
-    - name: bash
-      image: bash:latest
-      command:
-      - sleep
-      args:
-      - 9999999
+  - name: bash
+    image: bash:latest
+    command:
+    - sleep
+    args:
+    - 9999999
 """
     }
   }
