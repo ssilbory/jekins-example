@@ -57,6 +57,7 @@ spec:
         container('bash') {
           sh 'echo bash container'
           sh 'sh --version'
-}
+          }
     }
   }
+}
