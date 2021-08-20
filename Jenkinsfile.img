@@ -3,8 +3,9 @@ pipeline {
     kubernetes {
       // Use Kubernetes to build our images.
       // Use Img instead of docker so we can build images without access to docker.
-      // Note that you must have the secret docker-credentials in your namespace.
-      // Note2 you need to run a privileged container which is less insecure than exposing your docke socket.
+      // Note You must define a Jenkins Credentials. (see README)
+      // Note2 You need to run a privileged container which is less insecure than exposing your docker socket.
+      // Note3 The bash container is just a demo to show you can use multiple containers in your Pod.
       defaultContainer 'img'
       yaml """
 kind: Pod
@@ -32,26 +33,30 @@ spec:
     }
   }
   environment {
-      APP_NAME          = 'tomcat'
+      APP_NAME          = 'myapp'
+      //REPO_USER = credentials('docker-repo-user')
+      //REPO_PASSWORD = credentials('docker-repo-password')
   }
   stages {
-    stage('Build with Img') {
-      // You might want to break this into multiple stages
-      steps {
-        // Build container
-        sh "img build . -t ${APP_NAME}:${env.BUILD_ID}"
-        // You can also auth like this instead of the docker secret.
-        // sh "img login -u $REPO_USER -p REPO_PASSWORD"
-        //sh "img push ${DOCKER_REPO}:${env.BUILD_ID}"
-        }
-    }
+    // This is just a stub to demo using the non-default container.
+    // You could for example build your app then package with it with the img container.
     stage('Bash container') {
       steps {
         container('bash') {
           sh 'echo bash container'
           sh 'ls '
-          }
+        }
       }
+    }
+    // Note that I'm using the default container img here.
+    stage('Build Docker image with Img') {
+      steps {
+        // Build container with the Jenkins build id as the docker tag
+        sh "img build . -t ${APP_NAME}:${env.BUILD_ID}"
+        // You need to
+        // sh "img login -u $REPO_USER -p REPO_PASSWORD"
+        //sh "img push ${DOCKER_REPO}:${env.BUILD_ID}"
+        }
     }
   }
 }

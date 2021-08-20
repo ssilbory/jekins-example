@@ -4,7 +4,7 @@ This repo contains an example of using Jenkins to build a simple tomcat app in D
 
 To use
 - Install or otherwise get access to Jenkins.
-- Create a docker secret with your docker login called docker-credentials. Alternately pass this as a Jenkin credential*.
+- Create a docker secret with your docker login called docker-credentials. Alternately pass this as a Jenkin credential.
 "kubectl create secret docker-registry --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email> --dry-run -o yaml >docker-credentials.yaml"
 https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials
 - Use the Jenkinsfile.kaniko or Jenkinsfile.img to create the pipeline and adjust the varibles in the environment section to match your app.
