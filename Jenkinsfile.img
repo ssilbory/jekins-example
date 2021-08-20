@@ -16,6 +16,8 @@ spec:
   containers:
   - name: img
     image: docker.io/ssilbory/img-builder:latest
+    securityContext:
+        privileged: true
     command:
     - sleep
     args:
