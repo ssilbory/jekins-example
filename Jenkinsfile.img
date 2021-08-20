@@ -36,16 +36,18 @@ spec:
     stage('Build with Img') {
       // You might want to break this into multiple stages
       steps {
-        sh 'echo default container'
-        sh 'ls /'
         // Build container
         sh "img build . -t ${DOCKER_REPO}:${env.BUILD_ID}"
         // You can also auth like this instead of the docker secret.
         // sh "img login -u $REPO_USER -p REPO_PASSWORD"
         //sh "img push ${DOCKER_REPO}:${env.BUILD_ID}"
+        }
+    }
+    stage('Build with Img') {
+      steps {
         container('bash') {
           sh 'echo bash container'
-          sh 'ls /'
+          sh 'ls '
           }
       }
     }
