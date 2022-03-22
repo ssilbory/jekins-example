@@ -2,7 +2,7 @@ pipeline {
   agent {
     kubernetes {
       // Use Kubernetes to build our images.
-      // Use Kaniko instead of docker so we can build images without access to docker.
+      // Use Kaniko instead of docker so we can build images without docker.
       // Note that you must have the secret docker-credentials in your namespace.
       defaultContainer 'kaniko'
       yaml """
@@ -19,6 +19,12 @@ spec:
     volumeMounts:
       - name: jenkins-docker-cfg
         mountPath: /kaniko/.docker
+   - name: bash
+    image: bash:latest
+    command:
+    - sleep
+    args:
+    - 9999999
   volumes:
   - name: jenkins-docker-cfg
     projected:
@@ -41,6 +47,16 @@ spec:
       steps {
         //
         sh "/kaniko/executor --context `pwd` --destination ${DOCKER_REPO}:${env.BUILD_ID}"
+      }
+    }
+    // This is just a stub to demo using the non-default container.
+    // You could for example deploy and test your newly build container.
+    stage('Bash container') {
+      steps {
+        container('bash') {
+          sh 'echo test/deploy stage'
+          sh 'ls '
+        }
       }
     }
   }
