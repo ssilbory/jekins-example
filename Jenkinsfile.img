@@ -56,7 +56,8 @@ spec:
         // You need to login to push the container.  Use Jenkins secrets to pass your auth.
         // sh "img login -u $REPO_USER -p REPO_PASSWORD"
         //sh "img push ${DOCKER_REPO}:${env.BUILD_ID}"
-        }
+       }
+    }
     // This is just a stub to demo using the non-default container.
     // You could for example deploy and test your newly build container.
     stage('Bash container') {
@@ -66,7 +67,6 @@ spec:
           sh 'ls '
         }
       }
-    }
     }
   }
 }
